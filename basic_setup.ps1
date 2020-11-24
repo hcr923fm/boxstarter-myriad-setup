@@ -7,9 +7,13 @@ $Cred=Get-Credential "${ServerName}\${UserName}"
 $scriptsUrlRoot="https://raw.githubusercontent.com/hcr923fm/boxstarter-myriad-setup/master/"
 
 # Do some generic defucking of Windows
+Write-Host "Setting up Windows Explorer" -ForegroundColor Yellow
 Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/FileExplorerSettings.ps1 -ComputerName $ServerName -Credential $Cred -DisableReboots
+Write-Host "Removing cruft apps" -ForegroundColor Yellow
 Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/RemoveDefaultApps.ps1 -ComputerName $ServerName -Credential $Cred -DisableReboots
+Write-Host "Disabling unnecessary features and installing aria2" -ForegroundColor Yellow
 Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/enable_utilities.ps1"-ComputerName $ServerName -Credential $Cred -DisableReboots
+Write-Host "Installing useful web browsers" -ForegroundColor Yellow
 Install-BoxstarterPackage -PackageName https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/Browsers.ps1 -ComputerName $ServerName -Credential $Cred -DisableReboots
 
 # Install Myriad server deps, if necessary
