@@ -37,3 +37,5 @@ $choices.Add((New-Object Management.Automation.Host.ChoiceDescription -ArgumentL
 
 $installMyriadClientBins = $Host.UI.PromptForChoice("", "Install Myriad Playout 5 client binaries?", $choices, 1)
 if($installMyriadClientBins -eq 0){ Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/myriad_client_download.ps1"-ComputerName $ServerName -Credential $Cred }
+
+Invoke-Reboot
