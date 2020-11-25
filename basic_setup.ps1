@@ -32,19 +32,18 @@ if($setChocoSchedTask -eq 0){ Install-BoxstarterPackage -PackageName "$scriptsUr
 
 # Install Myriad server deps, if necessary
 Write-Host "Warning - only install Myriad Playout Server 5 deps if the Myriad data partition has already been created." -ForegroundColor Red
-$choices = New-Object Collections.ObjectModel.Collection[Management.Automation.Host.ChoiceDescription]
 $installMyriadServerDeps = $Host.UI.PromptForChoice("", "Install Myriad Playout 5 server dependencies?", $choices, 1)
 if($installMyriadServerDeps -eq 0){ Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/myriad_server_deps_install.ps1"-ComputerName $ServerName -Credential $Cred }
 
 # Download Myriad v5 server binaries
-$choices = New-Object Collections.ObjectModel.Collection[Management.Automation.Host.ChoiceDescription]
 $installMyriadServerBins = $Host.UI.PromptForChoice("", "Install Myriad Playout 5 server binaries?", $choices, 1)
 if($installMyriadServerBins -eq 0){ Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/myriad_server_download.ps1"-ComputerName $ServerName -Credential $Cred }
 
 # Install Myriad client deps, if necessary
 # Download Myriad v5 server binaries
-$choices = New-Object Collections.ObjectModel.Collection[Management.Automation.Host.ChoiceDescription]
 $installMyriadClientBins = $Host.UI.PromptForChoice("", "Install Myriad Playout 5 client binaries?", $choices, 1)
 if($installMyriadClientBins -eq 0){ Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/myriad_client_download.ps1"-ComputerName $ServerName -Credential $Cred }
 
-Invoke-Reboot
+# Reboot
+$reboot = $Host.UI.PromptForChoice("", "Reboot?", $choices, 0)
+if($reboot){Invoke-Reboot}
