@@ -2,7 +2,7 @@
 Write-Host "Finding CCleaner binary..."
 
 $chocoExec=(Get-ChildItem -Path "$env:ProgramFiles;${env:ProgramFiles(x86)};$env:Path".Split(';') -R "chocolatey.exe" -ErrorAction Ignore | Select-Object -First 1).FullName
-if(
+
 if($chocoExec){
 $Action = New-ScheduledTaskAction -Execute $chocoExec -Argument "update all -y"
 $Trigger = New-ScheduledTaskTrigger -At 3am -Weekly -DaysOfWeek Sunday
