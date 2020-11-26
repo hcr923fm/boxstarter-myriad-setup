@@ -20,10 +20,10 @@ if(!$NoInstallSetup){
 if($InstallMyriadServerDeps){
     if($SqlServerDataRootDir){
         Invoke-Command -ComputerName $ComputerName -Credential $cred -ScriptBlock { Write-Output "$Using:SqlServerDataRootDir" | Out-File C:/SqlServerDataRootDir.txt }
-    }
+    } else { Write-Host "Not setting an override value for the SQL Server Data Root directory. To override, pass '-SqlServerDataRootDir DRV:\Path\To\Dir" -ForegroundColor Magenta }
     if($SqlServerSysAdminPass){
         Invoke-Command -ComputerName $ComputerName -Credential $cred -ScriptBlock { Write-Output "$Using:SqlServerSysAdminPass" | Out-File C:/SqlServerSysAdminPass.txt }
-    }
+    } else { Write-Host "Not setting an admin password for the SQL Server sysadmin. To override, pass '-SqlServerSysAdminPass PasswordHere" -ForegroundColor Magenta }
     
     Install-BoxstarterPackage -ComputerName $ComputerName -Credential $cred -PackageName "$scriptsUrlRoot/scripts/myriad_server_deps_install.ps1"
 
