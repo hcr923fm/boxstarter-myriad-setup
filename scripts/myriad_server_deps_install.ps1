@@ -1,11 +1,11 @@
 ﻿$sqlServerInstallArgs='/BROWSERSVCSTARTUPTYPE=Automatic'
 #$sqlServerDataRootPathOverride = Read-Host -Prompt "Where should the SQL Server Data Root Directory be, if overriding? [ $env:ProgramFiles\Microsoft SQL Server ]"
 #if($sqlServerDataRootPathOverride){$sqlServerInstallArgs += " /INSTALLSQLDATADIR=`"`"${sqlServerDataRootPathOverride}`"`""}
-if($v=Get-Item "C:/SqlServerDataRootDir.txt"){$sqlServerInstallArgs += " /INSTALLSQLDATADIR=`"`"$((Get-Content $v.FullName).Trim())`"`""}
+if($v=Get-Item "C:\SqlServerDataRootDir.txt"){$sqlServerInstallArgs += " /INSTALLSQLDATADIR=`"`"$((Get-Content $v).Trim())`"`""}
 
 #$sqlServerUserPassOverride= Read-Host -Prompt "Enter a password for the SQL Server system admin account (leave blank to disable Mixed Mode authentication)"
 #if($sqlServerUserPassOverride){$sqlServerInstallArgs += " /SECURITYMODE=SQL /SAPWD=`"`"$sqlServerUserPassOverride`"`""}
-if($v=Get-Item "C:/SqlServerSysAdminPass.txt"){$sqlServerInstallArgs += " /SECURITYMODE=SQL /SAPWD=`"`"$((Get-Content $v.FullName).Trim())`"`""}
+if($v=Get-Item "C:\SqlServerSysAdminPass.txt"){$sqlServerInstallArgs += " /SECURITYMODE=SQL /SAPWD=`"`"$((Get-Content $v).Trim())`"`""}
 
 Write-Host "Using the following extra arguments:"
 Write-Host $sqlServerInstallArgs
