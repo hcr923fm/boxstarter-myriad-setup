@@ -1,4 +1,6 @@
-﻿Param([switch] $InstallMyriadServerDeps,
+﻿Param(
+[switch] $NoInstallSetup,
+[switch] $InstallMyriadServerDeps,
 [switch] $DownloadMyriadServerFiles,
 [switch] $DownloadMyriadClientFiles,
 [string] $SqlServerDataRootDir,
@@ -10,8 +12,10 @@ $ErrorActionPreference="Continue"
 $scriptsUrlRoot="https://raw.githubusercontent.com/hcr923fm/boxstarter-myriad-setup/master/"
 $cred=Get-Credential
 
-Install-BoxstarterPackage -ComputerName $ComputerName -Credential $cred -PackageName "$scriptsUrlRoot/scripts/basic_setup.ps1"
-Install-BoxstarterPackage -ComputerName $ComputerName -Credential $cred -PackageName "$scriptsUrlRoot/scripts/set_ccleaner_scheduled_task.ps1"
+if(!$NoInstallSetup){
+    Install-BoxstarterPackage -ComputerName $ComputerName -Credential $cred -PackageName "$scriptsUrlRoot/scripts/basic_setup.ps1"
+    Install-BoxstarterPackage -ComputerName $ComputerName -Credential $cred -PackageName "$scriptsUrlRoot/scripts/set_ccleaner_scheduled_task.ps1"
+}
 
 if($InstallMyriadServerDeps){
     if($SqlServerDataRootDir){
