@@ -25,7 +25,21 @@ catch { Write-Host "Unable to remove default applications!" -ForegroundColor Red
 
 Write-Host "Disabling unnecessary features and installing aria2" -ForegroundColor Yellow
 #Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/enable_utilities.ps1"-ComputerName $ServerName -Credential $Cred -DisableReboots
-executeScript "$scriptsUrlRoot/scripts/enable_utilities.ps1"
+#executeScript "$scriptsUrlRoot/scripts/enable_utilities.ps1"
+Disable-GameBarTips
+Disable-MicrosoftUpdate
+Disable-UAC
+Disable-BingSearch
+Enable-RemoteDesktop
+Set-StartScreenOptions -EnableBootToDesktop -EnableDesktopBackgroundOnStart
+Set-ExplorerOptions -showFileExtensions -showHiddenFilesFoldersDrives -showProtectedOSFiles
+cinst aria2 -y
+cinst ccleaner -y
+
+# FFMpeg is 64bit only in choco
+if([System.Environment]::Is64BitOperatingSystem){
+    cinst ffmpeg -y
+}
 
 Write-Host "Installing useful web browsers" -ForegroundColor Yellow
 try {executeScript "https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/Browsers.ps1"}
