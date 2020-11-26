@@ -19,10 +19,10 @@ if(!$NoInstallSetup){
 
 if($InstallMyriadServerDeps){
     if($SqlServerDataRootDir){
-        Invoke-Command -ComputerName $ComputerName -Credential $cred -ScriptBlock { Write-Output "$SqlServerDataRootDir" | Out-File C:/SqlServerDataRootDir.txt }
+        Invoke-Command -ComputerName $ComputerName -Credential $cred -ScriptBlock { Write-Output "$Using:SqlServerDataRootDir" | Out-File C:/SqlServerDataRootDir.txt }
     }
     if($SqlServerSysAdminPass){
-        Invoke-Command -ComputerName $ComputerName -Credential $cred -ScriptBlock { Write-Output "$SqlServerSysAdminPass" | Out-File C:/SqlServerSysAdminPass.txt }
+        Invoke-Command -ComputerName $ComputerName -Credential $cred -ScriptBlock { Write-Output "$Using:SqlServerSysAdminPass" | Out-File C:/SqlServerSysAdminPass.txt }
     }
     
     Install-BoxstarterPackage -ComputerName $ComputerName -Credential $cred -PackageName "$scriptsUrlRoot/scripts/myriad_server_deps_install.ps1"
