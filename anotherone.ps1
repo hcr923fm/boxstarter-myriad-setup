@@ -1,1 +1,0 @@
-﻿echo "mything: $env:ThisIsMyThing"
