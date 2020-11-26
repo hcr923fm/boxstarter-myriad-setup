@@ -7,8 +7,8 @@ $Cred=Get-Credential "${ServerName}\${UserName}"
 $scriptsUrlRoot="https://raw.githubusercontent.com/hcr923fm/boxstarter-myriad-setup/master/"
 
 # Do some generic defucking of Windows
-Write-Host "Installing chocolatey" -ForegroundColor Yellow
-Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/install_chocolatey.ps1"-ComputerName $ServerName -Credential $Cred -DisableReboots
+#Write-Host "Installing chocolatey" -ForegroundColor Yellow
+#Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/install_chocolatey.ps1"-ComputerName $ServerName -Credential $Cred -DisableReboots
 Write-Host "Setting up Windows Explorer" -ForegroundColor Yellow
 Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/FileExplorerSettings.ps1 -ComputerName $ServerName -Credential $Cred -DisableReboots
 Write-Host "Removing cruft apps" -ForegroundColor Yellow
