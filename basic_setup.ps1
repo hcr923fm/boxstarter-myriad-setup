@@ -2,7 +2,7 @@
 function executeScript {
     Param ([string]$script)
     write-host "executing $script ..."
-	iex ((new-object net.webclient).DownloadString("$script"))
+	iex ((new-object net.webclient).DownloadString("$script")) -ErrorAction Ignore
 }
 
 #$ServerName = Read-Host -Prompt "Which machine are we installing on? [ $env:COMPUTERNAME ]"
@@ -18,18 +18,21 @@ function executeScript {
 #Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/install_chocolatey.ps1"-ComputerName $ServerName -Credential $Cred -DisableReboots
 Write-Host "Setting up Windows Explorer" -ForegroundColor Yellow
 #Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/FileExplorerSettings.ps1 -ComputerName $ServerName -Credential $Cred -DisableReboots
-executeScript "https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/FileExplorerSettings.ps1"
+try { executeScript "https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/FileExplorerSettings.ps1" }
+catch { Write-Host "Unable to set up Windows Explorer!" -ForegroundColor Red }
 
 Write-Host "Removing cruft apps" -ForegroundColor Yellow
 #Install-BoxstarterPackage -PackageName https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/RemoveDefaultApps.ps1 -ComputerName $ServerName -Credential $Cred -DisableReboots
-executeScript "https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/RemoveDefaultApps.ps1"
+try{ executeScript "https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/RemoveDefaultApps.ps1" }
+catch { Write-Host "Unable to remove default applications!" -ForegroundColor Red }
 
 Write-Host "Disabling unnecessary features and installing aria2" -ForegroundColor Yellow
 #Install-BoxstarterPackage -PackageName "$scriptsUrlRoot/scripts/enable_utilities.ps1"-ComputerName $ServerName -Credential $Cred -DisableReboots
 executeScript "$scriptsUrlRoot/scripts/enable_utilities.ps1"
 
 Write-Host "Installing useful web browsers" -ForegroundColor Yellow
-executeScript "https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/Browsers.ps1"
+try {executeScript "https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/Browsers.ps1"}
+catch { Write-Host "Unable to install browsers!" -ForegroundColor Red }
 
 $choices = New-Object Collections.ObjectModel.Collection[Management.Automation.Host.ChoiceDescription]
 $choices.Add((New-Object Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes'))
