@@ -42,5 +42,5 @@ if([System.Environment]::Is64BitOperatingSystem){
 }
 
 Write-Host "Installing useful web browsers" -ForegroundColor Yellow
-try {executeScript "https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/Browsers.ps1"}
+try {executeScript "https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/master/scripts/Browsers.ps1"}
 catch { Write-Host "Unable to install browsers!" -ForegroundColor Red }
