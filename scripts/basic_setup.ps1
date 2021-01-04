@@ -35,6 +35,9 @@ Set-StartScreenOptions -EnableBootToDesktop -EnableDesktopBackgroundOnStart
 Set-ExplorerOptions -showFileExtensions -showHiddenFilesFoldersDrives -showProtectedOSFiles
 cinst aria2 -y
 cinst ccleaner -y
+cinst speccy -y
+cinst vlc -y
+cinst sublimetext3 -y
 
 # FFMpeg is 64bit only in choco
 if([System.Environment]::Is64BitOperatingSystem){
