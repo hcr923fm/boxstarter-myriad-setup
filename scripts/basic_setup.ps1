@@ -38,7 +38,7 @@ cinst ccleaner -y
 cinst speccy -y
 cinst vlc -y
 cinst sublimetext3 -y
-cinst intel-dsa -y
+# cinst intel-dsa -y
 
 # FFMpeg is 64bit only in choco
 if([System.Environment]::Is64BitOperatingSystem){
